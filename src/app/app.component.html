@@ -138,6 +138,7 @@
   .card.card.highlight-card span {
     margin-left: 60px;
   }
+
   a,
   a:visited,
   a:hover {
@@ -230,11 +231,12 @@
 
 <!-- Toolbar -->
 <div class="toolbar" role="banner">
-  <svg style="margin:0 10px ; color:red" class="bi bi-chat-right-quote-fill"  height="30" viewBox="0 0 16 16" 
-  width="30" xmlns="http://www.w3.org/2000/svg">
-  <path fill="#D6092C" 
-  d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353V2zM7.194 4.766c.087.124.163.26.227.401.428.948.393 2.377-.942 3.706a.446.446 0 0 1-.612.01.405.405 0 0 1-.011-.59c.419-.416.672-.831.809-1.22-.269.165-.588.26-.93.26C4.775 7.333 4 6.587 4 5.667 4 4.747 4.776 4 5.734 4c.271 0 .528.06.756.166l.008.004c.169.07.327.182.469.324.085.083.161.174.227.272zM11 7.073c-.269.165-.588.26-.93.26-.958 0-1.735-.746-1.735-1.666 0-.92.777-1.667 1.734-1.667.271 0 .528.06.756.166l.008.004c.17.07.327.182.469.324.085.083.161.174.227.272.087.124.164.26.228.401.428.948.392 2.377-.942 3.706a.446.446 0 0 1-.613.01.405.405 0 0 1-.011-.59c.42-.416.672-.831.81-1.22z"/></svg>
-  
+  <svg style="margin:0 10px;" class="bi bi-chat-right-quote-fill" height="30" viewBox="0 0 16 16" width="30"
+    xmlns="http://www.w3.org/2000/svg">
+    <path fill="#f1115d"
+      d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353V2zM7.194 4.766c.087.124.163.26.227.401.428.948.393 2.377-.942 3.706a.446.446 0 0 1-.612.01.405.405 0 0 1-.011-.59c.419-.416.672-.831.809-1.22-.269.165-.588.26-.93.26C4.775 7.333 4 6.587 4 5.667 4 4.747 4.776 4 5.734 4c.271 0 .528.06.756.166l.008.004c.169.07.327.182.469.324.085.083.161.174.227.272zM11 7.073c-.269.165-.588.26-.93.26-.958 0-1.735-.746-1.735-1.666 0-.92.777-1.667 1.734-1.667.271 0 .528.06.756.166l.008.004c.17.07.327.182.469.324.085.083.161.174.227.272.087.124.164.26.228.401.428.948.392 2.377-.942 3.706a.446.446 0 0 1-.613.01.405.405 0 0 1-.011-.59c.42-.416.672-.831.81-1.22z" />
+  </svg>
+
   <span>Random Quotes Generator page</span>
   <div class="spacer"></div>
   <a aria-label="Twitter" target="_blank" rel="noopener" href="#" title="Twitter">
@@ -256,13 +258,21 @@
 </div>
 
 <div class="content" role="main">
-  <h2>Quotes</h2>
+  <h2>Quotes
+    <button mat-fab (click)="refresh()" title="Get new Quotes" style="width: 25px;height: 25px;">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </h2>
+  <div style="display: flex;align-items: center;">
+    <div class="card-container" *ngFor="let quote of quotes$ | async">
+      <blockquote>
+        <a class="card" [@fadeIn]>
+          {{quote.content}} -
+          <strong>{{quote.author}}</strong>
+        </a>
+      </blockquote>
+    </div>
 
-  <div class="card-container" *ngFor="let quote of quotes$ | async">
-    <a class="card" [@fadeIn]>
-      {{quote.content}} -
-      {{quote.author}}
-    </a>
   </div>
 
   <svg id="clouds" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677" viewBox="0 0 2611.084 485.677">

@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of, map, tap} from 'rxjs';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,6 +15,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
       transition('void <=> *', animate('1s ease-in')),
     ]),
   ],
+  
 })
 export class AppComponent implements OnInit {
   title = 'random-quote-generator';
@@ -23,14 +25,17 @@ export class AppComponent implements OnInit {
 
    ngOnInit() {
     this.getQuotes();
-    setInterval(() => {
-      this.getQuotes();
-    }, 5000)
    }
 
   getQuotes() {
     const url = "https://api.quotable.io/quotes/random";
     this.quotes$ = this.http.get(url);
+  }
+
+  refresh() {
+    setTimeout(() => {
+      this.getQuotes();
+    }, 1000)
   }
 }
 
