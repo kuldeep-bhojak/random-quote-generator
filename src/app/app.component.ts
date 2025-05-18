@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
    }
 
   getQuotes() {
-    const url = "https://api.quotable.io/quotes/random";
+    const url = "http://api.quotable.io/quotes/random";
     this.quotes$ = this.http.get(url);
   }
 
